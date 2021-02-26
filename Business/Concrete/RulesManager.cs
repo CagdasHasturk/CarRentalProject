@@ -8,7 +8,7 @@ namespace Business.Concrete
     {
         public void CheckNameAndDailyPrice(Car car)
         {
-            if (car.Description.Length < 2)
+            if (car.CarName.Length < 2)
             {
                 throw new Exception("Description field must be two character at least.");
             }
