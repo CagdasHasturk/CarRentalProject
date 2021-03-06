@@ -13,7 +13,7 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
 
-            CarManager carManager = new CarManager(new EfCarDal(), new RulesManager());
+            CarManager carManager = new CarManager(new EfCarDal());
 
             //Add a new car 
             carManager.Add(new Car
@@ -52,23 +52,18 @@ namespace ConsoleUI
 
 
             //List all cars
-            foreach (var car in carManager.GetAll())
+            var getAllresult = carManager.GetAll();
+            if (getAllresult.Success)
             {
-                Console.WriteLine($"{car.Id} - {car.CarName}");
+                foreach (var car in getAllresult.Data)
+                {
+                    Console.WriteLine($"{car.Id} - {car.CarName}");
+                }
             }
-
-            //List a car by id
-            Car carToList = carManager.GetById(1);
-            Console.WriteLine($"{carToList.Id} - {carToList.CarName}");
-
-            //List car details by id
-            foreach (var car in carManager.GetCarDetails())
+            else
             {
-                Console.WriteLine($"Car name : {car.CarName}\nBrand name : {car.BrandName}\n" +
-                    $"Color name : {car.CarName}\nDaily price : {car.DailyPrice}\n");
+                Console.WriteLine(getAllresult.Message);
             }
-           
-
 
         }
     }
