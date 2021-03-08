@@ -21,7 +21,7 @@ namespace Business.Concrete
 
         public bool isCarRentable(Rental rental)
         {
-            var result = _rentalDal.GetAll(r => r.CarId == rental.CarId).SingleOrDefault(r => r.RentalDate == null);
+            var result = _rentalDal.GetAll(r => r.CarId == rental.CarId).SingleOrDefault(r => r.ReturnDate == null);
 
             if (result == null)
             {
@@ -29,6 +29,7 @@ namespace Business.Concrete
             }
             return false;
         }
+
         public IResult Add(Rental rental)
         {
             if (isCarRentable(rental))
